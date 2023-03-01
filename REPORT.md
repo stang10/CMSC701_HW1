@@ -1,8 +1,9 @@
 # Samantha Tang CMSC701 Project 1 Report 
+My code for this project can be found at: [https://github.com/stang10/CMSC701_HW1](https://github.com/stang10/CMSC701_HW1).
 ## Part (a), constructing the suffix array and an auxiliary index
 **What did you find to be the most challenging part of implementing the buildsa program?**
 
-While serializing my data was a difficult part of this assignment, I realized that was simply a matter of refreshing myself on the topic. In truth, the most challenging part of implementing the buildsa program was constructing the prefix tables for a file. Under the guidance of questions on Piazza, I chose to use a dense representation of the prefix table. Therefore, I found the most difficult part being how to calculate which prefix would align to which index in the table. It took a period of experimentation with different values of k and various prefixes of length k to determine the mathematical formula for computing the index of a given prefix. In truth, its implementation in the code did not take much, but I felt it was the component of Part (a) that required me to think the most about what to implement rather than how to implement it.
+While serializing my data was a difficult part of this assignment, I realized that was simply a matter of refreshing myself on the topic. In truth, the most challenging part of implementing the buildsa program was constructing the prefix tables for a file. Under the guidance of questions on Piazza, I chose to use a dense representation of the prefix table. Therefore, I found the most difficult part being how to calculate which prefix would align to which index in the table. It took a period of experimentation with different values of k and various prefixes of length k to determine the mathematical formula for computing the index of a given prefix. In truth, its implementation in the code did not take much, but I felt it was the component of Part (a) that required me to think the most about what needed to be implemented rather than how to implement it.
 
 **For references of various size, I answer the following questions in the table below:**
 
@@ -10,7 +11,7 @@ While serializing my data was a difficult part of this assignment, I realized th
 
 **How large is the resulting serialized file?**
 
-| Reference | Size of Genome (in characters) | Size of Serialized File | Time for Suffix Array | Time for Program | Max RSS Size (Approx RAM) |
+| Reference | Size of Genome (in characters) | Size of Serialized File | Time to Build Suffix Array | Time to Run Program | Max RSS Size (Approx RAM) |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | NZ_KV839643.1 | 45625 | 411 KB | 3568594 nanoseconds | 0.01 seconds | 1252 KB |
 | U00096.2 | 4639675 | 41.8 MB | 309803821 nanoseconds | 11.06 seconds | 165880 KB |
@@ -20,7 +21,7 @@ While serializing my data was a difficult part of this assignment, I realized th
 
 For NZ_KV839643.1:
 
-| k | Size of Serialized File | Time for Program | Max RSS Size (Approx RAM) |
+| k | Size of Serialized File | Time to Run Program | Max RSS Size (Approx RAM) |
 | ----------- | ----------- | ----------- | ----------- |
 | 2 | 411 KB | 0.01 seconds | 1256 KB | 
 | 4 | 415 KB | 0.02 seconds | 1256 KB | 
@@ -28,7 +29,7 @@ For NZ_KV839643.1:
 
 For U00096.2:
 
-| k | Size of Serialized File | Time for Program | Max RSS Size (Approx RAM) |
+| k | Size of Serialized File | Time to Run Program | Max RSS Size (Approx RAM) |
 | ----------- | ----------- | ----------- | ----------- |
 | 2 | 41.757 MB | 11.86 seconds | 148588 KB | 
 | 4 | 41.761 MB | 11.91 seconds | 154836 KB | 
@@ -36,19 +37,19 @@ For U00096.2:
 
 For CP100583.1:
 
-| k | Size of Serialized File | Time for Program | Max RSS Size (Approx RAM) |
+| k | Size of Serialized File | Time to Run Program | Max RSS Size (Approx RAM) |
 | ----------- | ----------- | ----------- | ----------- |
 | 2 | 60.569 MB | 26.78 seconds | 239396 KB | 
 | 4 | 60.572 MB | 27.45 seconds | 245628 KB | 
 | 6 | 60.634 MB | 26.89 seconds | 250840 KB | 
 
 **Given the scaling above, how large of a genome do you think you could construct the suffix array for on a machine with 32GB of RAM, why?**
-It has been stated on multiple webpages that Max RSS is roughly the amount of RAM used by a program. As such, we can look to the values of Max RSS sizes for each of the sequence sizes to determine an approximate relationship between the sequence size and Max RSS size of the program using the sequence size. 
+It has been stated on multiple webpages that Max RSS is roughly the amount of RAM used by a program. As such, we can look to the values of Max RSS sizes for each of the sequence sizes to determine an approximate relationship between the sequence size and Max RSS size of the program using the sequence. 
 
 Note: 4639675/45625 = 101.6915 and 165880/1252 = 132.4920.
 Additionally: 6729861/4639675 = 1.4505 and 231868/165880 = 1.3978.
 
-Though there are a small number of data points to draw a conclusion from, I would approximate that the Max RSS size scales proportionate to the sequence size. The values do not perfectly reflect this, but it aproximately trends this way, enough to make a prediction about the size of the genome that a suffix array could be constructed for with 32 GB of RAM. 
+Though there are a small number of data points to draw a conclusion from, I would approximate that the Max RSS size scales proportionate to the sequence size. The values do not perfectly reflect this, but it aproximately trends this way. I will use this observation to make a prediction about the size of the genome that a suffix array could be constructed for with 32 GB of RAM. 
 
 32 GB = 32000000 KB. 32000000/231868 = 138.0096. 6729861*138.0096 = 928785424.666 which rounds down to 928785424.
 
@@ -58,7 +59,7 @@ Therefore, I would approximate that you could construct a suffix array of a geno
 
 **What did you find to be the most challenging part of implementing the query program?**
 
-The most challenging part of implementing the query program was determine the bounds in the suffix array for matching prefixes. That is to say, writing a binary search function to locate one hit in the suffix array that contained the query as a prefix was easy, but then determining the first and last indices of values in the suffix array that contains the query as a prefix was more difficult. Initially, my first thought was to simply iterate through indices lower than the first hit until the query is no longer a prefix and similarly for indices greater than the first hit. However, I realized for long genomes, depending on the length of the query string, we could be iterating for ten of thousands of indices in each direction. So, since we used binary search to find the first hit because of its improved search speed, I determined I should use it to search for the leftmost index where the query is a prefix in the suffix array and the rightmost index. 
+The most challenging part of implementing the query program was determining the bounds in the suffix array for suffixes whose prefixes match a query string. That is to say, writing a binary search function to locate one hit in the suffix array that contained the query as a prefix was easy, but then determining the first and last indices of values in the suffix array that contains the query as a prefix was more difficult. Initially, my first thought was to simply iterate through indices lower than the first hit until the query is no longer a prefix and similarly for indices greater than the first hit. However, I realized for long genomes, depending on the length of the query string, we could be iterating for tens of thousands of indices in each direction. So, since we used binary search to find the first hit because of its improved search speed, I determined I should use it to search for the leftmost index where the query is a prefix in the suffix array and the rightmost index. I did this by searching within the bounds in which the first hit was found. (In other words if binary search with left index l and right index ended because we found the value at the midpoint value c between l and r, I then run binary search between l and c to determine if there are more matches to the left of c. I continue this process of searching between a hit and the left bound it was found within until -1 is returned meaning there are no more to the left of the hit. This is also mirrored for values to the right of c.)
 
 **For references of various size, I answer the following questions in the table below:**
 
@@ -97,7 +98,7 @@ For smaller sized references and smaller sized queries, we can see that it many 
 **How does the speed further compare when not using a prefix lookup table versus using a prefix lookup table with different values of k?**
 In general, as k increases, the time to compute the query decreases however there are various queries that do not have their times to compute decrease. The time stays relatively the same or even becomes worse. 
 
-| Reference | Size of Genome (in characters) | Size of Query (in characters) | Naive or SimpAccel | Time for Query | Time for Query (k = 2) |  Time for Query (k = 4) | Time for Query (k = 6) | 
+| Reference | Size of Genome (in characters) | Size of Query (in characters) | Naive or SimpAccel | Time for Query Without Prefixes | Time for Query (k = 2) |  Time for Query (k = 4) | Time for Query (k = 6) | 
 | ----------- | ----------- | ----------- | ----------- | ----------- |  ----------- | ----------- | ----------- | 
 | NZ_KV839643.1 | 45625 | 8 (intended to fail) | Naive | 510262 nanoseconds | 380497 nanoseconds | 167842 nanoseconds | 1085 nanoseconds |
 | NZ_KV839643.1 | 45625 | 6 | Naive | 47063 nanoseconds |  50592 nanoseconds |26598 nanoseconds| 50323 nanoseconds |
@@ -125,4 +126,5 @@ In general, as k increases, the time to compute the query decreases however ther
 | CP100583.1 | 6729861 | 700 | SimpAccel | 95613990 nanoseconds |97551136 nanoseconds|85088400 nanoseconds|72069311 nanoseconds|
 
 **Given the scaling above, and the memory requirements of each type of index, what kind of tradeoff do you personally think makes sense in terms of using more memory in exchange for faster search.**
-As I stated above, greater values of k does appear to lead to a faster search in many cases. However, at a certain points, increased values of k make little to no improvement in the speed of the search. Additionally note, that while the k values increasing improves the speed up until a certain point due to the benefits of pre-computation from the prefix table, we have exponential growth in the size of the prefix table. As such, it does make sense to trade the memory used by the prefix tables for the resulting faster search up until a point, as at this point k will offer little to no improvement but we will exponentially use up more memory. 
+
+As I stated above, greater values of k does appear to lead to a faster search in many cases. However, at a certain points, increased values of k make little to no improvement in the speed of the search. Additionally note, that while the k values increasing improves the speed up until a certain point due to the benefits of pre-computation from the prefix table, we have exponential growth in the size of the prefix table. As such, it does make sense to trade the memory used by the prefix tables for the resulting faster search up until a point, as at this point there will be diminishing return as k will offer little to no improvement but we will use exponentially more memory. 
