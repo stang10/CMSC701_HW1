@@ -78,19 +78,19 @@ For smaller sized references and smaller sized queries, we can see that it many 
 | NZ_KV839643.1 | 45625 | 6 | SimpAccel | 61880 nanoseconds | 
 | NZ_KV839643.1 | 45625 | 70 | SimpAccel | 73666 nanoseconds | 
 | NZ_KV839643.1 | 45625 | 700 | SimpAccel | 142185 nanoseconds | 
-| U00096.2 | 4639675 | 8 (intended to fail) | Naive | 78720109 nanoseconds |
+| U00096.2 | 4639675 | 11 (intended to fail) | Naive | 78720109 nanoseconds |
 | U00096.2 | 4639675 | 6 | Naive | 56241818 nanoseconds |
 | U00096.2 | 4639675 | 70 | Naive | 73918527 nanoseconds |
 | U00096.2 | 4639675 | 700 | Naive | 79707024 nanoseconds |
-| U00096.2 | 4639675 | 8 (intended to fail) | SimpAccel | 93960131 nanoseconds |
+| U00096.2 | 4639675 | 11 (intended to fail) | SimpAccel | 93960131 nanoseconds |
 | U00096.2 | 4639675 | 6 | SimpAccel | 94557859 nanoseconds |
 | U00096.2 | 4639675 | 70 | SimpAccel | 70811414 nanoseconds |
 | U00096.2 | 4639675 | 700 | SimpAccel | 63340721 nanoseconds |
-| CP100583.1 | 6729861 | 8 (intended to fail) | Naive | 114731312 nanoseconds |
+| CP100583.1 | 6729861 | 30 (intended to fail) | Naive | 114731312 nanoseconds |
 | CP100583.1 | 6729861 | 6 | Naive | 112834037 nanoseconds |
 | CP100583.1 | 6729861 | 70 | Naive | 90553634 nanoseconds |
 | CP100583.1 | 6729861 | 700 | Naive | 115454868 nanoseconds |
-| CP100583.1 | 6729861 | 8 (intended to fail) | SimpAccel | 119256990 nanoseconds |
+| CP100583.1 | 6729861 | 30 (intended to fail) | SimpAccel | 119256990 nanoseconds |
 | CP100583.1 | 6729861 | 6 | SimpAccel | 136418259 nanoseconds |
 | CP100583.1 | 6729861 | 70 | SimpAccel | 96500861 nanoseconds |
 | CP100583.1 | 6729861 | 700 | SimpAccel | 95613990 nanoseconds |
@@ -108,19 +108,19 @@ In general, as k increases, the time to compute the query decreases however ther
 | NZ_KV839643.1 | 45625 | 6 | SimpAccel | 61880 nanoseconds | 87665 nanoseconds | 89005 nanoseconds| 98105 nanoseconds |
 | NZ_KV839643.1 | 45625 | 70 | SimpAccel | 73666 nanoseconds | 119247 nanoseconds| 136026 nanoseconds| 97750 nanoseconds|
 | NZ_KV839643.1 | 45625 | 700 | SimpAccel | 142185 nanoseconds | 115252 nanoseconds | 90753 nanoseconds|74620 nanoseconds|
-| U00096.2 | 4639675 | 8 (intended to fail) | Naive | 78720109 nanoseconds |  65940866 nanoseconds | 49907398 nanoseconds|32841360 nanoseconds|
+| U00096.2 | 4639675 | 11 (intended to fail) | Naive | 78720109 nanoseconds |  65940866 nanoseconds | 49907398 nanoseconds|32841360 nanoseconds|
 | U00096.2 | 4639675 | 6 | Naive | 56241818 nanoseconds | 56325023 nanoseconds| 42094205 nanoseconds|26894985 nanoseconds|
 | U00096.2 | 4639675 | 70 | Naive | 73918527 nanoseconds |48840864 nanoseconds| 48500844 nanoseconds|25537683 nanoseconds|
 | U00096.2 | 4639675 | 700 | Naive | 79707024 nanoseconds |39708815 nanoseconds|38814981 nanoseconds |28487711 nanoseconds|
-| U00096.2 | 4639675 | 8 (intended to fail) | SimpAccel | 93960131 nanoseconds | 74961523 nanoseconds| 55390046 nanoseconds|39639621 nanoseconds|
+| U00096.2 | 4639675 | 11 (intended to fail) | SimpAccel | 93960131 nanoseconds | 74961523 nanoseconds| 55390046 nanoseconds|39639621 nanoseconds|
 | U00096.2 | 4639675 | 6 | SimpAccel | 94557859 nanoseconds |84823265 nanoseconds|53203290 nanoseconds|34312689 nanoseconds|
 | U00096.2 | 4639675 | 70 | SimpAccel | 70811414 nanoseconds |65057405 nanoseconds|55852154 nanoseconds| 54194297 nanoseconds|
 | U00096.2 | 4639675 | 700 | SimpAccel | 63340721 nanoseconds |56397030 nanoseconds|  46502571 nanoseconds| 36716761 nanoseconds|
-| CP100583.1 | 6729861 | 8 (intended to fail) | Naive | 114731312 nanoseconds | 100693185 nanoseconds| 100249434 nanoseconds|94996881 nanoseconds|
+| CP100583.1 | 6729861 | 30 (intended to fail) | Naive | 114731312 nanoseconds | 100693185 nanoseconds| 100249434 nanoseconds|94996881 nanoseconds|
 | CP100583.1 | 6729861 | 6 | Naive | 112834037 nanoseconds |98213206 nanoseconds|89963296 nanoseconds|42300303 nanoseconds|
 | CP100583.1 | 6729861 | 70 | Naive | 90553634 nanoseconds |82155854 nanoseconds |61023072 nanoseconds|62461419 nanoseconds|
 | CP100583.1 | 6729861 | 700 | Naive | 115454868 nanoseconds |83212478 nanoseconds|89038764 nanoseconds|58042999 nanoseconds|
-| CP100583.1 | 6729861 | 8 (intended to fail) | SimpAccel | 119256990 nanoseconds |105572117 nanoseconds|109582218 nanoseconds|99105375 nanoseconds|
+| CP100583.1 | 6729861 | 30 (intended to fail) | SimpAccel | 119256990 nanoseconds |105572117 nanoseconds|109582218 nanoseconds|99105375 nanoseconds|
 | CP100583.1 | 6729861 | 6 | SimpAccel | 136418259 nanoseconds |102039371 nanoseconds|93759084 nanoseconds|60319667 nanoseconds|
 | CP100583.1 | 6729861 | 70 | SimpAccel | 96500861 nanoseconds |93015365 nanoseconds|73489007 nanoseconds|70177447 nanoseconds|
 | CP100583.1 | 6729861 | 700 | SimpAccel | 95613990 nanoseconds |97551136 nanoseconds|85088400 nanoseconds|72069311 nanoseconds|
