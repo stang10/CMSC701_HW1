@@ -13,7 +13,6 @@ int64_t * binaryQuery(std::string ref, int64_t sa[], int64_t l, int64_t r, std::
     if (r >= l){
         int64_t c = l + (r-l)/2;
         std::string comp = ref.substr(sa[c], qLen);
-        //std::cout << "Binary Test: " << comp << " < " << query << " is: " << (comp < query) << std::endl;
 
         if(comp == query){
             ret[0] = c; 
@@ -54,9 +53,6 @@ int64_t * lcpBinaryQuery(std::string ref, int64_t sa[], int64_t l, int64_t lLCP,
         int64_t useLCP = std::min(lLCP, rLCP);
         std::string lcpComp = comp.substr(useLCP);
         std::string lcpQuery = query.substr(useLCP);
-        // std::cout << "LCP Binary left " << ref.substr(sa[l], qLen) << " and right " << ref.substr(sa[r], qLen) << std::endl;
-        // std::cout << "LCP Binary using " << comp << " and " << query << std::endl;
-        // std::cout << lcpComp << " < " << lcpQuery << " is: " << (lcpComp < lcpQuery) << std::endl;
 
         int64_t cLCP = useLCP + lcp(lcpComp, lcpComp.size(), lcpQuery, lcpQuery.size());
         if(lcpComp == lcpQuery){
@@ -118,21 +114,12 @@ int main(int argc, char* argv[]) {
         
         int64_t refLen, k, pSize; 
         Index.read((char *) &refLen, sizeof(refLen));
-        // std::cout << refLen;
-        // std::cout << "\n";
         std::string ref;
         ref.resize(refLen);
         Index.read((char *) ref.c_str(), refLen);
-        //std::cout << ref << std::endl;
         std::unique_ptr<int64_t[]> sa(new int64_t[refLen]);
         Index.read((char *) &sa[0], refLen*sizeof(sa[0]));
-        // std::cout  << "[ ";
-        // for (size_t i = 0; i < refLen; ++i) {
-        //   std::cout << sa[i] << ((i < refLen-1) ? ", " : " ");
-        // }
-        // std::cout << "]\n";
         Index.read((char *) &k, sizeof(k));
-        //std::cout << k << std::endl;
 
         std::vector<std::string> names;
         std::vector<std::string> queries;
@@ -140,12 +127,8 @@ int main(int argc, char* argv[]) {
         std::string tmpRec = "";
         std::int64_t recCount = 0;
         while (getline(QueryFile, tmp)) {
-            //std::cout << (tmp.empty()) << std::endl;
           if ((!tmp.empty()) && (tmp.at(0) != '>')) {
-            //std::cout << tmp << std::endl;
-            //std::cout << (tmp.empty()) << std::endl;
             tmp.erase(std::remove_if(tmp.begin(), tmp.end(), ::isspace), tmp.end());
-            //std::cout << tmp << std::endl;
             tmpRec = tmpRec + tmp; 
             tmp.clear();
           }
@@ -170,16 +153,6 @@ int main(int argc, char* argv[]) {
 
         int64_t nSize = names.size();
         int64_t qSize = queries.size();
-        // std::cout  << "[ ";
-        // for (size_t i = 0; i < nSize; ++i) {
-        //   std::cout << names[i] << ((i < nSize-1) ? ", " : " ");
-        // }
-        // std::cout << "]\n";
-        // std::cout  << "[ ";
-        // for (size_t i = 0; i < qSize; ++i) {
-        //   std::cout << queries[i] << ((i < qSize-1) ? ", " : " ");
-        // }
-        // std::cout << "]\n";
 
         pSize = int(pow(4,k));
         int64_t ps[pSize], pe[pSize];
@@ -236,13 +209,8 @@ int main(int argc, char* argv[]) {
                 OutputFile << count;
             } else {
                 if (arg3 == "naive"){
-                    // std::cout << "Left Search Index: " << leftIndex << std::endl;
-                    // std::cout << "Right Search Index: " << rightIndex << std::endl;
-
                     int64_t* test = binaryQuery(ref, (sa.get()), leftIndex, rightIndex, check, checkLen);
                     int64_t c = *test, l = *(test + 1), r = *(test + 2);
-                    // std::cout << "Query: " << i << " " << check << std::endl;
-                    // std::cout << "First hit: " << c << std::endl;
 
                     int64_t count;
 
@@ -259,8 +227,6 @@ int main(int argc, char* argv[]) {
                             left = c;
                         }
 
-                        //std::cout << "Left: " << left << std::endl;
-
                         int64_t* test4 = binaryQuery(ref, (sa.get()), c + 1, r, check, checkLen);
                         int64_t n = *test4, nl = *(test4 + 1), nr = *(test4 + 2), right = -1;
                         while ((n) != -1){
@@ -272,8 +238,6 @@ int main(int argc, char* argv[]) {
                         if (right == -1) {
                             right = c; 
                         }
-
-                        //std::cout << "Right: " << right << std::endl;
 
                         count = (right - left + 1);
                         end = std::chrono::high_resolution_clock::now();
@@ -307,15 +271,10 @@ int main(int argc, char* argv[]) {
                     int64_t lLCP, rLCP;
                     lLCP = lcp(ref.substr(sa[leftIndex]), ref.substr(sa[leftIndex]).size(), check, checkLen);
                     rLCP = lcp(ref.substr(sa[rightIndex]), ref.substr(sa[rightIndex]).size(), check, checkLen);
-                    //std::cout << "Query: " << i << " " << check << std::endl;
-                    //std::cout << "Left: " << leftIndex << " " << ref.substr(sa[leftIndex],10) << " LCP: " << lLCP << std::endl;
-                    //std::cout << "Right: " << rightIndex << " " << ref.substr(sa[rightIndex],10) << " LCP: " << rLCP << std::endl;
 
                     int64_t * first = lcpBinaryQuery(ref, (sa.get()), leftIndex, lLCP, rightIndex, rLCP, check, checkLen);
                     int64_t c = *first, l = *(first + 1), r = *(first + 2);
                     int64_t fclcp = *(first + 3), fllcp = *(first + 4), frlcp =  *(first + 5);
-                    //std::cout << "Query: " << i << " " << check << std::endl;
-                    //std::cout << "First hit: " << c << std::endl;
                     
                     int64_t count;
 
@@ -335,8 +294,6 @@ int main(int argc, char* argv[]) {
                             left = c;
                         }
 
-                        //std::cout << "Left: " << left << std::endl;
-
                         int64_t* rightHit = lcpBinaryQuery(ref, (sa.get()), c + 1, fclcp, r, frlcp, check, checkLen);
                         int64_t n = *rightHit, nl = *(rightHit + 1), nr = *(rightHit + 2), right = -1;
                         int64_t nclcp = *(rightHit + 3), nllcp = *(rightHit + 4), nrlcp =  *(rightHit + 5);
@@ -350,8 +307,6 @@ int main(int argc, char* argv[]) {
                         if (right == -1) {
                             right = c; 
                         }
-
-                        //std::cout << "Right: " << right << std::endl;
 
                         count = (right - left + 1);
                         end = std::chrono::high_resolution_clock::now();
@@ -397,42 +352,3 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
-
-
-
-
-/*handling queries shorter than prefixes*/
-// for (size_t i = 0; i < checkLen; ++i){
-//                         if (check[i] == 'A'){
-//                             std::cout << "A" << std::endl;
-//                             calc = calc + 0*int(pow(4, (k-1-i)));
-//                         } else if (check[i] == 'C'){
-//                             std::cout << "C" << std::endl;
-//                             calc = calc + 1*int(pow(4, (k-1-i)));
-//                         } else if (check[i] == 'G'){
-//                             std::cout << "G" << std::endl;
-//                             calc = calc + 2*int(pow(4, (k-1-i)));
-//                         } else {
-//                             std::cout << "T" << std::endl;
-//                             calc = calc + 3*int(pow(4, (k-1-i)));
-//                         }
-//                     }
-//                     int64_t leftTracker = calc;
-//                     while (ps[leftTracker] == -1 && (leftTracker < calc + int(pow(4, k-checkLen))-1)){
-//                         leftTracker = leftTracker + 1;
-//                     }
-//                     leftIndex = ps[leftTracker];
-//                     int64_t nextCalc = calc + int(pow(4, k-checkLen)) - 1;
-//                     if (nextCalc > pSize){
-//                         int64_t rightTracker = pSize - 1;
-//                         while (pe[rightTracker] == -1 && (rightTracker > calc)){
-//                             rightTracker = rightTracker - 1;
-//                         }
-//                         rightIndex = pe[rightTracker];
-//                     } else {
-//                         int64_t rightTracker = nextCalc;
-//                         while (pe[rightTracker] == -1 && (rightTracker > calc)){
-//                             rightTracker = rightTracker - 1;
-//                         }
-//                         rightIndex = pe[rightTracker];
-//                     }
