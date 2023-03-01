@@ -1,0 +1,5 @@
+/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/CMakeFiles/sais.dir
+/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/CMakeFiles/buildsa.dir
+/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/CMakeFiles/querysa.dir
+/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/CMakeFiles/edit_cache.dir
+/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/CMakeFiles/rebuild_cache.dir

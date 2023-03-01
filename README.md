@@ -1,31 +1,11 @@
-# cpp_sa_starter_proj
+# Samantha Tang CMSC701 Project 1
 
-This is a simple C++ starter for Project 1.  It creates an executable that compiles and links against an efficient suffix array construction library [libsais](https://github.com/IlyaGrebnov/libsais). The libsais implementation comes from [https://github.com/IlyaGrebnov/libsais](https://github.com/IlyaGrebnov/libsais) and is licensed udner the Apache 2 license found [here](https://github.com/IlyaGrebnov/libsais/blob/master/LICENSE).
+This project was written in C++. 
 
-To use this project, you can do the following. First, clone this repo (below `$` represents the prompt of your shell):
-
-```
-$git clone https://github.com/rob-p/cpp_sa_starter_proj
-$cd cpp_sa_starter_proj
-```
-
-Then, you can build the project from the command line — for this you will need [CMake](https://cmake.org/download/) and `make`.  Alternatively to building from the command line, if you are using VSCode or CLion, they should have builtin support or plugins for CMake which should let you build this project directly from within your IDE.  If you are using the command line, you should do the following:
-
-```
-$mkdir build
-$cmake ..
-$make
-```
-
-This should generate an executable in the current directory called `buildsa` which you can run:
-
-```
-$ ./buildsa
-```
-
-The output should be as follows:
-
-```
-suffix array construction successful!
-[ 6, 5, 3, 1, 0, 4, 2 ]
-```
+Multiple sources were consulted for this project:
+- I utilized the starter project at [https://github.com/rob-p/cpp_sa_starter_proj](https://github.com/rob-p/cpp_sa_starter_proj).
+- I consulted [https://www.w3schools.com/cpp/cpp_files.asp](https://www.w3schools.com/cpp/cpp_files.asp) for information regarding file input/output in C++.
+- For more detailed information about binary files, I consulted [https://www.tutorialspoint.com/reading-and-writing-binary-file-in-c-cplusplus](https://www.tutorialspoint.com/reading-and-writing-binary-file-in-c-cplusplus).
+- I consulted both [https://cplusplus.com/reference/](https://cplusplus.com/reference/) and [https://en.cppreference.com/](https://en.cppreference.com/) for the names and descriptions of various string and file related functions in C++ that I needed to refresh myself on.
+- As a refresher on implementing binary search, I referenced [https://www.geeksforgeeks.org/binary-search/](https://www.geeksforgeeks.org/binary-search/).
+- For general troubleshooting or "quick" implementation questions such as "Passing unique_ptr<int[]> to a function", I utilized [https://stackoverflow.com/](https://stackoverflow.com/).

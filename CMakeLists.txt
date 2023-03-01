@@ -10,3 +10,5 @@ target_include_directories(sais PUBLIC include)
 
 add_executable(buildsa src/buildsa.cpp)
 target_link_libraries(buildsa PUBLIC sais)
+
+add_executable(querysa src/querysa.cpp)

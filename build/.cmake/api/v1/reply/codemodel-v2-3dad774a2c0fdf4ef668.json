@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.19"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "CMSC701_Project1",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "buildsa::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-buildsa-Debug-d905d289586a3cfd8898.json",
+					"name" : "buildsa",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "querysa::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-querysa-Debug-9c9ee35b081feba7994e.json",
+					"name" : "querysa",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sais::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sais-Debug-b635764c13d2e18b5cef.json",
+					"name" : "sais",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj/build",
+		"source" : "/Users/samanthatang/Documents/UMD/Grad_School/Spring_2023/701/cpp_sa_starter_proj"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
